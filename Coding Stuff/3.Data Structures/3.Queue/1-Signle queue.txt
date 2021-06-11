@@ -1,0 +1,80 @@
+#include<iostream>
+using namespace std;
+int queue[100], front=-1, rear=-1,n=100;
+void insert()
+{
+	int val;
+	if(rear==n-1)
+	{
+		cout<<"Overflow";
+		
+	}
+	else
+	{
+		if(front ==-1)
+		front=0;
+		cout<<"Enter the values in queue ";
+		cin>>val;
+		rear++;
+		queue[rear]=val;
+	}
+}
+void del()
+{
+	if(front>rear || front==-1)
+	{
+		cout<<"Underflow";
+	return;
+	}
+	else
+	{
+		cout<<"DEleted element is "<<queue[front]<<endl;
+		front++;
+	}
+}
+void disp()
+{
+	if(front ==-1)
+	{
+		cout<<"Queue is empty";
+	}
+	else
+	{
+		cout<<"Queue elements are ";
+		for(int i=front ; i<=rear; i++)
+		cout<<queue[i]<<" ";
+	cout<<endl;
+	}
+}
+int main()
+{
+	cout<<"1 for the insert "<<endl;
+	cout<<"2 for the del "<<endl;
+	cout<<"3 for the disp"<<endl;
+	cout<<"4 for the exit "<<endl;
+	int ch;
+	
+	do
+	{
+		cout<<"Enter your choice ";
+		cin>>ch;
+		switch(ch)
+		{
+		
+		case 1:
+			insert();
+			break;
+		case 2:
+			del();
+			break;
+		case 3:
+			disp();
+			break;
+		case 4:
+			exit(0);
+		}
+	}while(ch!=4);
+	
+	return 0;
+	
+}

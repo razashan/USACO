@@ -1,0 +1,90 @@
+#include<iostream>
+#include<conio.h>
+using namespace std;
+class Node
+{
+	int data;
+	Node * next;
+	public:
+		Node (int a)
+		{
+			data=a;
+			next=NULL;
+		}
+		void set_data(int a)
+		{
+			data=a;
+		}
+		int get_data()
+		{
+			return data;
+		}
+		void set_next(Node * temp)
+		{
+			next=temp;
+		}
+		Node * get_next()
+		{
+			return next;
+		}
+};
+class Stack
+{
+	Node * top=NULL;
+	public:
+		void push(int a)
+		{
+			Node * newnode= new Node(a);
+			newnode->set_data(a);
+			newnode->set_next(top);
+			top=newnode;
+			
+		}
+		void pop()
+		{
+			if(top==NULL)
+			{
+				
+				cout<<"Stack is empty ";
+			}
+			else
+			{
+				cout<<"The popped element is "<<top->get_data();
+				top=top->get_next();
+			}
+		}
+		void disp()
+		{
+			Node * temp;
+			if(top==NULL)
+			{
+				cout<<"Nothing in the list "<<endl;
+			}
+			else
+			{
+				temp=top;
+				while(temp!=NULL)
+					
+{
+										
+					cout<<temp->get_data()<<"  ";
+		
+					temp=temp->get_next();
+}
+			//cout<<endl;
+	}
+			}
+			
+};
+int main()
+{
+	Stack s;
+	s.push(10);
+	s.push(20);
+	s.push(30);
+	s.push(40);
+	s.pop();
+	s.disp();
+	system("pause");	
+	}		
+		

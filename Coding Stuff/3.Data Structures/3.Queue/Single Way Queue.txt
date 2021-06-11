@@ -1,0 +1,68 @@
+#define CAPACITY 5
+#include<iostream>
+#include<conio.h>
+using namespace std;
+int queue[CAPACITY];
+int rear=0;
+int front=0;
+void insert()
+{
+	if(CAPACITY ==rear)
+	{
+		cout<<"Queue is full ";
+	}
+	else
+	{
+		int ele;
+		cout<<"Enter the elements in queue";
+		cin>>ele;
+		queue[rear]=ele;
+		rear++;
+	}
+
+}
+void dele()
+{
+	if(front ==rear)
+	{
+		cout<<"List is empty ";
+	}
+	else
+	{
+		cout<<"Deleted Queue is "<<queue[front]<<endl;
+		for(int i=0; i<rear-1; i++)
+		{
+			queue[i]=queue[i+1];
+		}
+		rear--;
+	}
+
+}
+void disp()
+{
+	if(front ==rear)
+	{
+		cout<<"Queue is empty";
+	}
+	else
+	{
+		cout<<"Elements are ";
+		for(int i=front; i<rear; i++)
+		{
+			cout<<queue[i]<<endl;
+		}
+
+	}
+}
+int main()
+{
+	insert();
+	insert();
+	insert();
+	insert();
+	insert();
+	disp();
+	dele();
+	disp();
+	system("pause");
+}

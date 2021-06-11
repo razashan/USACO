@@ -1,0 +1,214 @@
+#include<iostream>
+#define MAX 10
+#include<conio.h>
+using namespace std;
+class Node
+{
+	int data;
+	Node * next;
+public:
+	Node(int );
+	void set_data(int);
+	int get_data();
+	void set_next(Node*);
+	Node * get_next(){
+		return next;
+	}
+
+};
+Node::Node(int x)
+{
+	data=x;
+	next=NULL;
+}
+void Node::set_data(int x)
+{
+	data=x;
+}
+int Node::get_data()
+{
+	return data;
+}
+void Node::set_next(Node * temp)
+{
+	next=temp;
+}
+class LinkedList
+{
+	Node * start;
+public:
+	LinkedList()
+	{
+		start =NULL;// no elements in list 
+	}
+	void showall()
+	{
+		Node * temp=start;
+		while (temp!=NULL)
+		{
+			cout<<temp->get_data()<<endl;
+			temp=temp->get_next();
+		}
+		}
+	void addnode(int val)
+	{
+		if(start==NULL)
+		{
+			start= new Node(val);
+		}
+		else
+		{
+			Node * temp=new Node(val);
+			temp->set_next(start);
+			start=temp;
+		}
+	}
+	void append(int val)
+	{
+		Node * x= new Node(val);
+		if(start==NULL)
+		
+			start=x;
+		
+		else{
+			Node * temp=start;
+			while (temp->get_next()!=NULL)
+			{
+				temp=temp->get_next();
+			}
+			temp->set_next(x);
+		}
+			
+
+			}
+	Node * searchnode(int val){
+
+		Node * temp=start;// start say start ho jao 
+
+		while (temp!=NULL && temp->get_data() != val)
+		{
+			temp=temp->get_next();
+		}
+		return temp;}
+	void update_node(int old , int newval)
+	{
+		Node * temp=searchnode(old);
+		if(temp!=NULL)
+		{
+			temp->set_data(newval);
+		}
+	}
+	void insert_node(int x1, int y1)
+	{
+		Node * temp=searchnode(x1);
+		if(temp!=NULL)
+		{
+			Node * z1= new Node(y1);
+			z1->set_next(temp->get_next());
+			temp->set_next(z1);
+		}
+	}
+	int emp()
+	{
+		int count;
+		if(start==NULL)
+		{
+			cout<<"List is empty "<<endl;
+		}
+	}
+	void delete_node(int val)
+	{
+		if(start==NULL)
+			return;
+		else
+		{
+			Node * temp=start;
+			if (start->get_data()==val)
+		{
+			start=start->get_next();
+			delete(temp);
+		}
+		else
+		{
+			//Node * temp =start;
+			while(temp->get_next() != NULL && temp->get_next() ->get_data()!=val)
+			{
+				temp=temp->get_next();
+			}
+		}
+		if(temp->get_next()==NULL)
+		{
+			cout<<"Not Found "<<endl;
+		}
+		else
+		{
+			Node * x1=temp->get_next();
+			temp->set_next(x1->get_next());
+			delete(x1);
+		}
+
+	}
+
+	}
+	int size()
+	{
+		int count;
+		Node * temp=start;
+		while (temp->get_next()!=NULL)
+		{
+			count++;
+			temp=temp->get_next();
+		}
+		return count;
+	}
+	int get_start_val()
+	{
+		if(start==NULL)
+		return -1;
+		else
+			return start.get_data();
+	}
+
+
+};
+class stack
+{
+	LinkedList list;
+	int count;
+	public:
+	stack()
+	{
+		count = 0;
+	}
+
+	int is_full()
+	{
+		if(list.size()>=MAX)
+			return 1;
+		else
+			return 0;
+	}
+	int is_empty()
+	{
+		return (list.emp());
+	}
+
+	int push(int a){
+		if(is_full())
+			return 1;
+		else
+			list.addnode(a);
+	}
+	int pop()
+	{
+		if(is_empty())
+			return -1;
+		else
+			return data[--front];
+	}
+	int top()
+	{
+		return list.get_start_val();
+	}
+
+};

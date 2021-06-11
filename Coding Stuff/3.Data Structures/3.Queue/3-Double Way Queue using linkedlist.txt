@@ -1,0 +1,218 @@
+//deque (usually pronounced like "deck") is an irregular acronym of double-ended queue. Double-ended queues are sequence containers //with dynamic sizes that can be expanded or contracted on both ends (either its front or its back).
+
+#include<iostream>
+#include<conio.h>
+using namespace std;
+struct Node
+{
+	int info;
+	Node * next;
+	Node * prev;
+};
+Node *head,*tail;
+class Dequeue
+{
+public:
+	int top1,top2;
+	void Insert();
+	void del();
+	void disp();
+	Dequeue()
+	{
+		top1=0;
+		top2=0;
+		head=NULL;
+		tail=NULL;
+	}
+};
+int main()
+{
+	int ch;
+	Dequeue d1;
+	while(1)
+	{
+		cout<<"Operations are the Following "<<endl;
+		cout<<"1.Insert Element into the Dequeue "<<endl;
+		cout<<"2.Delete Element from the Dequeue "<<endl;
+		cout<<"3.Traverse the Dequeue "<<endl;
+		cout<<"4.Quit "<<endl;
+		cout<<"Enter your choice ";
+		cin>>ch;
+		switch (ch)
+		{
+		case 1:
+			d1.Insert();
+			break;
+		case 2:
+			d1.del();
+			break;
+		case 3:
+			d1.disp();
+			break;
+		case 4:
+			exit(1);
+			break;
+
+		default:
+			cout<<"Wrong Choice "<<endl;
+			
+		}
+	}
+	system("pause");
+}
+void Dequeue::Insert()
+{
+	struct Node * temp;
+	int ch, value;
+	if(top1+top2>=50)
+	{
+		cout<<"Overflow "<<endl;
+		return;
+	}
+	if(top1+top2==0)
+	{
+		cout<<"Enter the value to be insert ";
+		cin>>value;
+		head =new (struct Node);
+		head->info=value;
+		head->next=NULL;
+		head->prev=NULL;
+		tail=head;
+		top1++;
+		cout<<"Element inserted into the empty space "<<endl;
+	}
+	else
+	{
+		while (1)
+		{
+			cout<<endl;
+			cout<<"1 Enter element at first "<<endl;
+			cout<<"2 Enter element at last "<<endl;
+			cout<<"3 Exit "<<endl;
+			cout<<"Enter the Your choice ";
+			cin>>ch;
+			cout<<endl;
+			switch (ch)
+			{
+			case 1:
+				cout<<"Enter the value to insert ";
+				cin>>value;
+				temp=new(struct Node);
+				temp->info=value;
+				temp->next=head;
+				temp->prev=NULL;
+				head->prev=temp;
+				head=temp;
+				top1++;
+				break;
+			case 2:
+				cout<<"Enter the value to insert ";
+				cin>>value;
+				temp=new (struct Node);
+				temp->info=value;
+				temp->next=NULL;
+				tail->prev=tail;
+				tail->next=temp;
+				tail=temp;
+				top2++;
+				break;
+			case 3:
+				return ;
+				break;
+
+			default:
+				cout<<"Wrong Choice "<<endl;
+			}
+		}
+	}
+}
+void Dequeue::del()
+{
+	if(top1+top2<=0)
+	{
+		cout<<"UnderFlow "<<endl;
+		return;
+	}
+	int ch;
+	while (1)
+	{
+		cout<<"1.Delete Element from First "<<endl;
+		cout<<"2.Delete Element from last "<<endl;
+		cout<<"3.Exit "<<endl;
+		cout<<endl;
+		cout<<"Enter your choice ";
+		cin>>ch;
+		cout<<endl;
+		switch (ch)
+		{
+		case 1:
+
+			head=head->next;
+			head->prev=NULL;
+			top1--;
+			break;
+		case 2:
+			tail=tail->next;
+			tail->prev=NULL;
+			top2--;
+			break;
+		case 3:
+			return;
+			break;
+		default:
+	
+			cout<<"Wrong Choice "<<endl;
+		}
+	}
+
+}
+void Dequeue::disp()
+{
+	struct Node * temp;
+	int ch;
+	if(top1+top2<=0)
+	{
+		cout<<"UnderFlow "<<endl;
+		return;
+	}
+	while (1)
+	{
+		cout<<"1 for Display From begining "<<endl;
+		cout<<"2 for Display from End "<<endl;
+		cout<<"3 Quit "<<endl;
+		cout<<endl;
+		cout<<"Enter your choice ";
+		cin>>ch;
+		switch (ch)
+		{
+		case 1:
+			temp=head;
+			cout<<"Queue From begining "<<endl;
+			while(temp!=NULL)
+			{
+				cout<<temp->info<<" ";
+				temp=temp->next;
+			}
+			cout<<endl;
+			break;
+		case 2:
+			cout<<"Queue from End "<<endl;
+			temp=tail;
+			while (temp!=NULL)
+			{
+				cout<<temp->info<<" ";
+				temp=temp->prev;
+			}
+			temp=tail;
+			cout<<endl;
+			break;
+			
+		case 3:
+			return;
+			break;
+		default:
+			
+			cout<<"Wrong Choice "<<endl;
+	}
+	}
+}

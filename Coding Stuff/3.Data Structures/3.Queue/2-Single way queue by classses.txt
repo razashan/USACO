@@ -1,0 +1,73 @@
+#include<iostream>
+#include<conio.h>
+using namespace std;
+
+class queue
+{
+	int queue[100],n=100,front=-1,rear=-1;
+	public:
+		void insert()
+		{
+			int val;
+			if(rear==n-1)
+			{
+				cout<<"Overflow";
+			}
+			else
+			{
+				
+				if(front==-1)
+				
+					front=0;
+					cout<<"Enter the elements ";
+					cin>>val;
+					rear++;
+					queue[rear]=val;
+					
+				
+				
+			}
+	}	
+void del()
+{
+	if(front==-1)
+	{
+		cout<<"List is empty ";
+	}
+	else
+	{
+		cout<<"The deleted element is "<<queue[front]<<endl;
+		front++;
+	}
+	}
+void disp()
+{
+	if(front ==-1)
+	{
+		cout<<"List is empty "<<endl;
+		}
+	else
+	{
+		cout<<"Elements are "<<endl;
+		for(int i=front ; i<=rear; i++)
+			cout<<queue[i]<<" ";
+			
+		cout<<endl;
+	
+	
+	}
+	
+}		
+	
+};
+int main()
+{
+	queue obj;
+	obj.insert();
+	obj.insert();
+	obj.insert();
+	obj.insert();
+	obj.disp();
+	obj.del();
+	obj.disp();
+}

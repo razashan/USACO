@@ -1,0 +1,105 @@
+#include<iostream>
+#include<conio.h>
+using namespace std;
+struct Node
+{
+	int priority;
+	int data;
+	Node * right;
+	Node * left;
+};
+class Queue
+{
+	Node * end;
+	Node * front;
+public:
+	Queue()
+	{
+		end=NULL;
+		front=NULL;
+	}
+	void insert(int item,int priority)
+	{
+		Node * temp,*q;
+		temp= new Node;
+		temp->data=item;
+		temp->priority=priority;
+		if(front==NULL || priority<=front->priority)
+		{
+			temp->right=front;
+			front=temp;
+		}
+		else
+		{
+			q=front;
+			while (q->right!=NULL && q->right->priority<=priority)
+			{
+				q=q->right;
+				temp->right=q->right;
+				q->right=temp;
+			}
+		}
+	}
+	void disp()
+	{
+		Node * temp=front;
+		while (temp!=NULL)
+		{
+			cout<<" Data is "<<temp->data<<"   ";
+			cout<<endl;
+			cout<<"Priority is "<<temp->priority<<"  "<<endl;
+			temp=temp->right;
+		}
+		cout<<endl;
+	}
+	void del()
+	{
+		if(front==NULL)
+		{
+			cout<<"Queue is Empty "<<endl;
+		}
+		else
+		{
+			Node * temp =front;
+			cout<<"Deleted Element is "<<temp->data<<endl;
+			front=front->right;
+			front->left=NULL;
+			free(temp);
+		}
+	}
+};
+int main()
+{
+	Queue Q;
+	int item ,choice,priority;
+	do
+	{
+		cout<<"1.Insert the element "<<endl;
+		cout<<"2.Delete the element "<<endl;
+		cout<<"3.Display the element"<<endl;
+		cout<<"Enter your choice ";
+		cin>>choice;
+		switch(choice)
+		{
+		case 1:
+			cout<<"Enter the data ";cin>>item;
+			cout<<"1 For High Priority "<<endl;
+			cout<<"2 For Mid priority "<<endl;
+			cout<<"3 For Low Priority "<<endl;
+			cout<<"Enter the priority ";
+			cin>>priority;
+			Q.insert(item,priority);
+			break;
+		case 2:
+			Q.del();
+			break;
+		case 3:
+			Q.disp();
+			break;
+		case 4:
+			break;
+		}
+	}while (choice!=4);
+system("pause");
+}
+

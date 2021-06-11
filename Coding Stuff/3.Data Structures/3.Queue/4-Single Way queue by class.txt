@@ -1,0 +1,66 @@
+#include<iostream>
+#include<conio.h>
+using namespace std;
+struct Node
+{
+	int data;
+	Node * next;
+}*front=NULL,*rear=NULL,*p=NULL,*np=NULL;
+void push(int x)
+{
+	np = new Node;
+	np->data=x;
+	np->next=NULL;
+	if(front==NULL)
+	{
+		front=rear=np;
+		rear->next=NULL;
+	}
+	else
+	{
+		rear->next=np;
+		rear=np;
+		rear->next=NULL;
+	}
+}
+int del()
+{
+	int x;
+	if(front==NULL)
+	{
+		cout<<"Queue is empty "<<endl;
+	}
+	else
+	{
+		p=front;
+		x=p->data;
+		front=front->next;
+		delete(p);
+		return x ;
+	}
+}int main()
+{
+	int n,c=0,x;
+	cout<<"Enter the values to be pushed";
+	cin>>n;
+	while(c<n)
+	{
+		cout<<"Enter the values to be entered ";
+		cin>>x;
+		push(x);
+		c++;
+	}
+	cout<<"Removed values "<<endl;
+	while (true)
+	{
+		if(front!=NULL)
+		{
+			cout<<del()<<endl;
+		}
+		else
+		{
+			break;
+		}
+	}
+	system("pause");
+}
